@@ -1,34 +1,44 @@
 package com.FrameWork.utilities;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigurationReader {
-    //1-Create the object of the properties
-    private static Properties properties = new Properties();
+    private static Properties properties;
 
     static {
-
         try{
-            //2-We need to open the file in java memory: FileInputStream
-            FileInputStream file = new FileInputStream("configuration.properties");
-
-            //3-Lead the properties object using FileInputStream object
-            properties.load(file);
-
-            //close the file
-            file.close();
-
-        }catch (IOException e){
-            System.out.println("File not found in the ConfigurationReader Class");
+            String path = "configuration.properties";
+            FileInputStream input = new FileInputStream(path);
+            properties = new Properties();
+            properties.load(input);
+            input.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static String getProperty(String keyword){
-        return properties.getProperty(keyword);
+    public static String getProperty(String keyName){
+        return properties.getProperty(keyName);
     }
+    public static void setProperty(String key, String value) {
+        properties.setProperty(key,value);
 
+        // Güncellenmiş şifreyi properties dosyasına yaz
+        try (FileOutputStream fileOutput = new FileOutputStream("configuration.properties")) {
+            properties.store(fileOutput, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Güncellendikten sonra properties dosyasını tekrar yükle
+        try (FileInputStream fileInput = new FileInputStream("configuration.properties")) {
+            properties.load(fileInput);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
