@@ -1,6 +1,6 @@
-package com.FrameWork.pages;
+package Library.pages;
 
-import com.FrameWork.utilities.Driver;
+import Library.utilities.Driver;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {

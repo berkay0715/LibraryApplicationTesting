@@ -1,6 +1,6 @@
-package com.FrameWork.step_definitions;
+package Library.stepDefinitionss;
 
-import com.FrameWork.utilities.Driver;
+import Library.utilities.Driver;
 import io.cucumber.java.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
